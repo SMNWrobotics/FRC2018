@@ -3,14 +3,16 @@ package org.usfirst.frc1982.the2018Bot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class _AutoSMidGSwRight extends CommandGroup {
-	
 	public _AutoSMidGSwRight() {
-		addParallel(new AutoSMidGSwRight());
-//		addParallel(new ToggleHinge(), 1);
-//		addSequential(new ToggleHinge(), 1);
-		addParallel(new ElevatorSwitchHeight());
-		addParallel(new ClawOpen(2500));
-//		addSequential(new ClawToggle(), 2);
-//		addSequential(new ClawToggle(), 2);
+		double a = 24;
+		double ang = 45;
+		double b = 76.2;
+		double c = 24;
+		
+		addSequential(new MoveToPID(a));
+		addSequential(new TurnTo(ang));
+		addSequential(new MoveToPID(b));
+		addSequential(new TurnTo(-ang));
+		addSequential(new MoveToPID(c));
 	}
 }

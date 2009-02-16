@@ -1,9 +1,9 @@
-package org.usfirst.frc1982.the2018PracticeBot.commands;
+package org.usfirst.frc1982.the2018Bot.commands;
 
 //NEGATIVE ANGLES TURN TO THE LEFT!!!
 
-import org.usfirst.frc1982.the2018PracticeBot.Robot;
-import org.usfirst.frc1982.the2018PracticeBot.RobotMap;
+import org.usfirst.frc1982.the2018Bot.Robot;
+import org.usfirst.frc1982.the2018Bot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -86,7 +86,7 @@ public class TurnTo extends PIDCommand {
 	
 	
 /////borrowed from driveEnable command:
-    private double limit(double input) {
+	private double limit(double input) {
     	if (input > 1.0) {
     		input = 1.0;
     	} else if (input < -1.0) {
@@ -138,10 +138,10 @@ public class TurnTo extends PIDCommand {
         }
 
         RobotMap.driveLeft.set(limit(leftMotorOutput));
-        RobotMap.driveleftSlave.set(limit(leftMotorOutput));
+//        RobotMap.driveleftSlave.set(limit(leftMotorOutput));
         
         RobotMap.driveRight.set(limit(rightMotorOutput));
-        RobotMap.driverightSlave.set(limit(rightMotorOutput));
+//        RobotMap.driverightSlave.set(limit(rightMotorOutput));
       }
 	
 }

@@ -245,10 +245,10 @@ public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource {
       m_samples_mutex = null;
       m_samples_not_empty = null;
       DriverStation.reportError("could not find ADIS16448", false);
-      Robot.gyroValid = false;
+//      Robot.gyroValid = false;
       return;
     }
-    Robot.gyroValid = true;
+//    Robot.gyroValid = true;
 
     // Set IMU internal decimation to 204.8 SPS
     writeRegister(kRegSMPL_PRD, 201);

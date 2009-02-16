@@ -16,18 +16,23 @@ public class ClawOpen extends Command {
 		delay = MillisecondsDelay;
 	}
 	
+	public ClawOpen() {
+		requires(Robot.claw);
+		delay = 0;
+	}
+	
 	@Override
 	protected void initialize() {
 		oldTime = System.currentTimeMillis();
 		if (delay == 0) {
-			RobotMap.pneumaticsHinge.set(DoubleSolenoid.Value.kForward);
+			RobotMap.pneumaticsClaw.set(DoubleSolenoid.Value.kForward);
 		}
 	}
 	
 	@Override
 	protected void execute() {
 		if (System.currentTimeMillis()-oldTime >= delay) {
-			RobotMap.pneumaticsHinge.set(DoubleSolenoid.Value.kForward);
+			RobotMap.pneumaticsClaw.set(DoubleSolenoid.Value.kForward);
 		}
 	}
 	

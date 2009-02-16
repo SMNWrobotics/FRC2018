@@ -27,10 +27,13 @@ public class driveEnable extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+    	SmartDashboard.putNumber("Gyro Angle", Robot.gyro.getAngleZ()/4);
+    	
 //    	RobotMap.driveTrain.arcadeDrive(-Robot.oi.xbox.getY(), Robot.oi.xbox.getThrottle());
 //    	SmartDashboard.putNumber("Turning value:", Robot.oi.xbox.getThrottle());
     	
-    	
+    	SmartDashboard.putNumber("LeftEncoder", RobotMap.driveLeft.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("RightEncoder", RobotMap.driveRight.getSelectedSensorPosition(0));
 //    	RobotMap.driveLeft.set(-Robot.oi.xbox.getY());
 //    	RobotMap.driveRight.set(-Robot.oi.xbox.getY());
 //    	RobotMap.driveleftSlave.set(-Robot.oi.xbox.getY());

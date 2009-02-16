@@ -10,7 +10,8 @@ public class MoveTo extends Command {
 	private double distanceTravelled = 0.0;
 	private int direction;
 	private double target;
-	
+	private double maxSpeed = .5; //.5
+	private double deadzone = .1;
 	
 	public MoveTo(double distance) {
     	requires(Robot.drive);
@@ -29,6 +30,7 @@ public class MoveTo extends Command {
     protected void initialize() {
     	distanceTravelled = 0.0;
     	RobotMap.driveRight.setSelectedSensorPosition(0, 0, 0);
+    	RobotMap.driveLeft.setSelectedSensorPosition(0, 0, 0);
     	if (target > 0) {
     		direction = 1;
     	} else {
@@ -39,9 +41,18 @@ public class MoveTo extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	distanceTravelled = RobotMap.driveRight.getSelectedSensorPosition(0)*Robot.drive.inchesPerPulse;
+    	double rightTraveled = RobotMap.driveRight.getSelectedSensorPosition(0)*Robot.drive.RightInchesPerPulse;
+    	double leftTraveled = RobotMap.driveLeft.getSelectedSensorPosition(0)*Robot.drive.LeftInchesPerPulse;
+    	distanceTravelled = (rightTraveled + leftTraveled) / 2.0;
 //    	RobotMap.driveTrain.arcadeDrive(0.6*direction, 0.0);
+    	double proportion = .015; //0.015
+    	double difference = target - distanceTravelled;
     	
+    	double output = difference*proportion*direction;
+    	if (output > maxSpeed) output = maxSpeed;
+    	if (output < deadzone) output = deadzone;
+    	arcadeDrive(output, 0.0);
+    	System.out.println("Distance Travelled: " + distanceTravelled);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -49,6 +60,8 @@ public class MoveTo extends Command {
     protected boolean isFinished() {
     	if (Math.abs(distanceTravelled) >= Math.abs(target)) {
     		System.out.println("Auto command MoveTo should be finishing up");
+    		RobotMap.driveRight.setSelectedSensorPosition(0, 0, 0);
+        	RobotMap.driveLeft.setSelectedSensorPosition(0, 0, 0);
     		return true;
     	}
     	return false;
@@ -57,11 +70,76 @@ public class MoveTo extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	RobotMap.driveRight.setSelectedSensorPosition(0, 0, 0);
+    	RobotMap.driveLeft.setSelectedSensorPosition(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	RobotMap.driveRight.setSelectedSensorPosition(0, 0, 0);
+    	RobotMap.driveLeft.setSelectedSensorPosition(0, 0, 0);
     }
+    
+    
+    /////borrowed from driveEnable command:
+    private double limit(double input) {
+    	if (input > 1.0) {
+    		input = 1.0;
+    	} else if (input < -1.0) {
+    		input = -1.0;
+    	}
+    	return input;
+    }
+    
+    private void arcadeDrive(double xSpeed, double zRotation) {
+        xSpeed = limit(xSpeed);
+//        xSpeed = applyDeadband(xSpeed, m_deadband);
+
+        zRotation = limit(zRotation);
+//        zRotation = applyDeadband(zRotation, m_deadband);
+
+//        // Square the inputs (while preserving the sign) to increase fine control
+//        // while permitting full power.
+//        if (squaredInputs) {
+//          xSpeed = Math.copySign(xSpeed * xSpeed, xSpeed);
+//          zRotation = Math.copySign(zRotation * zRotation, zRotation);
+//        }
+
+        double leftMotorOutput;
+        double rightMotorOutput;
+
+        double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), xSpeed);
+
+        if (xSpeed > 0.0) {
+          // First quadrant, else second quadrant
+          if (zRotation >= 0.0) {
+            leftMotorOutput = maxInput;
+            rightMotorOutput = xSpeed - zRotation;
+          } else {
+            leftMotorOutput = xSpeed + zRotation;
+            rightMotorOutput = maxInput;
+          }
+        } else if (xSpeed < 0.0){
+          // Third quadrant, else fourth quadrant
+          if (zRotation >= 0.0) {
+            leftMotorOutput = xSpeed + zRotation;
+            rightMotorOutput = maxInput;
+          } else {
+            leftMotorOutput = maxInput;
+            rightMotorOutput = xSpeed - zRotation;
+          }
+        }else {
+        	 leftMotorOutput = zRotation;
+             rightMotorOutput = -zRotation;
+        }
+
+        RobotMap.driveLeft.set(limit(leftMotorOutput));
+        RobotMap.driveleftSlave.set(limit(leftMotorOutput));
+        
+        RobotMap.driveRight.set(limit(rightMotorOutput));
+        RobotMap.driverightSlave.set(limit(rightMotorOutput));
+      }
+    
 }

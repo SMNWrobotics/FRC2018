@@ -1,14 +1,11 @@
 package org.usfirst.frc1982.the2018PracticeBot.commands;
 
-//NEGATIVE ANGLES TURN TO THE LEFT!!!
-
 import org.usfirst.frc1982.the2018PracticeBot.Robot;
 import org.usfirst.frc1982.the2018PracticeBot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class TurnTo extends PIDCommand {
+public class MoveToPID extends PIDCommand {
 	
 	private boolean done = false;
 	private int ctr;
@@ -18,45 +15,37 @@ public class TurnTo extends PIDCommand {
 	
 	private volatile float out = (float) 0.0;
 	
-	public TurnTo( double degrees) {//, double maxSpeed) {
-//		super(0.65/90.0, 0.0, 0.0); //finished auto in 7 seconds with only P value (maxSpeed = .4)
-		super(1.25/90.0, 0.0002, 0.05);
-		requires(Robot.drive);
-		setInputRange(-95,95);
+	public MoveToPID(double distance) {
+		super(0.07, 0.0, 0.06);
+		setInputRange(-1000,1000);
 		setSetpoint(0);
-		target = degrees;
+		target = distance;
 	}
 	
 	protected void initialize() {
-		Robot.gyro.reset();
-		done = false;
+		System.out.println("MoveToPID started (initialized)");
 		ctr = 0;
-		out = (float) 0.0;
-//		setSetpointRelative(degrees);
-//		System.out.println("Initialize called");
+		done = false;
+		RobotMap.driveLeft.setSelectedSensorPosition(0, 0, 0);
+		RobotMap.driveRight.setSelectedSensorPosition(0, 0, 0);
 	}
 	
 	protected void execute() {
 		setSetpoint(target);
-//		RobotMap.driveTrain.arcadeDrive(0.0, out);
-//		RobotMap.driveleftSlave.set(RobotMap.driveLeft.getMotorOutputPercent());
-//    	RobotMap.driverightSlave.set(RobotMap.driveRight.getMotorOutputPercent());
-		arcadeDrive(0.0,out);
-//		System.out.println("Execute called.  output: " + out);
+		arcadeDrive(out,0.0);
 	}
 	
 	@Override
 	protected double returnPIDInput() {
-		double currentAng = Robot.gyro.getAngleZ()/4;
-		SmartDashboard.putNumber("Gyro Angle", currentAng);
+		double currentDist = (RobotMap.driveLeft.getSelectedSensorPosition(0)*Robot.drive.LeftInchesPerPulse + RobotMap.driveRight.getSelectedSensorPosition(0)*Robot.drive.RightInchesPerPulse) / 2.0;
 		
-		double diff = Math.abs(target - currentAng);
+		double diff = Math.abs(target - currentDist);
 		if (diff < 5.0) { ctr++; }
 		else { ctr = 0; }
 
-//		System.out.println("ReturnPIDInput called");
+		System.out.println("Distance: " + currentDist + " Target: " + getSetpoint() + " PIDout: " + out);
 		
-		return currentAng;
+		return currentDist;
 	}
 
 	@Override
@@ -66,10 +55,7 @@ public class TurnTo extends PIDCommand {
 		if (output > maxSpeed) output = maxSpeed;
 		if (output < -maxSpeed) output = -maxSpeed;
 		
-		SmartDashboard.putNumber("PID Output", output);
-		
 		out = (float) output;
-		System.out.println("TurnTo PID output: " + out);
 	}
 
 	@Override
@@ -83,8 +69,7 @@ public class TurnTo extends PIDCommand {
 		}
 		return done;
 	}
-	
-	
+
 /////borrowed from driveEnable command:
     private double limit(double input) {
     	if (input > 1.0) {

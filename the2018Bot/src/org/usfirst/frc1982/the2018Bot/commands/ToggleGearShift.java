@@ -42,10 +42,10 @@ public class ToggleGearShift extends Command {
     @Override
     protected void initialize() {
     	System.out.println("Toggled Gear Shift!");
-    	if (RobotMap.pneumaticsGearShifter.get() == DoubleSolenoid.Value.kForward) {
-    		RobotMap.pneumaticsGearShifter.set(DoubleSolenoid.Value.kReverse);
+    	if (RobotMap.pneumaticsGearShifter.get()) {
+    		RobotMap.pneumaticsGearShifter.set(false);
     	} else {
-    		RobotMap.pneumaticsGearShifter.set(DoubleSolenoid.Value.kForward);
+    		RobotMap.pneumaticsGearShifter.set(true);
     	}
     }
 

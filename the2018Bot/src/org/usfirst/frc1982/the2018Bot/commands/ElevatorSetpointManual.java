@@ -16,14 +16,18 @@ public class ElevatorSetpointManual extends Command {
 	@Override
 	protected void initialize() {
 		System.out.println("Setting position!!");
-		RobotMap.elevatorRight.set(ControlMode.Position, (((-Robot.oi.driver.getThrottle()+1)/2)*27000+5) );
 	}
 	
 	@Override
 	protected void execute() {
-		RobotMap.elevatorRight.set(ControlMode.Position, (((-Robot.oi.driver.getThrottle()+1)/2)*27000+5));
-		System.out.println(RobotMap.elevatorRight.getSelectedSensorPosition(0));
-//		System.out.println("Temp pos: " + (((-Robot.oi.xbox.getZ()+1)/2)*20000+5) + "Encoder: " + RobotMap.elevatorRight.getSelectedSensorPosition(0) + " Talon Output: " + RobotMap.elevatorRight.get());
+		double value =  (((-Robot.oi.driver.getThrottle()+1)/2)*31000+5);
+//		if (Robot.oi.driver.getThrottle() < 27000) {
+			RobotMap.elevatorRight.set(ControlMode.Position, value);
+//		} else if (Robot.oi.driver.getThrottle() < 27000){
+//			RobotMap.elevatorRight.set(ControlMode.PercentOutput, .5);
+//		}
+//		System.out.println(RobotMap.elevatorRight.getSelectedSensorPosition(0));
+		System.out.println("Temp pos: " + value + ", Encoder: " + RobotMap.elevatorRight.getSelectedSensorPosition(0));
 	}
 	
 	@Override

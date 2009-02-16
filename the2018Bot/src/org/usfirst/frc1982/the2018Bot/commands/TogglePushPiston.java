@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TogglePushPiston extends Command {
 
 	protected void initialize() {
-		if (RobotMap.pneumaticsPunch.get() == DoubleSolenoid.Value.kForward) {
-			RobotMap.pneumaticsPunch.set(DoubleSolenoid.Value.kReverse);
-			System.out.println("Setting Push Piston Solenoid to Reverse");
+		if (RobotMap.pneumaticsPunch.get()) {
+			RobotMap.pneumaticsPunch.set(false);
+			System.out.println("Setting Push Piston Solenoid to false");
 		} else {
-			RobotMap.pneumaticsPunch.set(DoubleSolenoid.Value.kForward);
-			System.out.println("Setting Push Piston Solenoid to Forward");
+			RobotMap.pneumaticsPunch.set(true);
+			System.out.println("Setting Push Piston Solenoid to true");
 		}
 	}
 	

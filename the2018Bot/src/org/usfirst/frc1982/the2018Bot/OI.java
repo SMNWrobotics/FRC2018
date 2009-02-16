@@ -55,7 +55,8 @@ public class OI {
     public JoystickButton elevatorSetPoint;
     public JoystickButton elevatorSetSwitch;
     public JoystickButton elevatorSetScale;
-    public JoystickButton hingeToggler;
+    public JoystickButton hingeTogglerDriver;
+    public JoystickButton hingeTogglerOpbox;
     public JoystickButton punchToggler;
     public JoystickButton punchAndOpen;
     public Joystick driver;
@@ -70,7 +71,7 @@ public class OI {
         gearShifter = new JoystickButton(driver, 2);
         gearShifter.whenPressed(new ToggleGearShift());
         
-        clawToggler = new JoystickButton(driver, 9);
+        clawToggler = new JoystickButton(driver, 1);
         clawToggler.whenPressed(new ClawToggle());
         
         elevatorManual = new JoystickButton(driver,12);
@@ -88,8 +89,11 @@ public class OI {
         elevatorSetScale = new JoystickButton(driver, 8);
         elevatorSetScale.whenPressed(new ElevatorScaleHeight());
         
-        hingeToggler = new JoystickButton(driver, 1);
-        hingeToggler.whenPressed(new ToggleHinge());
+        hingeTogglerDriver = new JoystickButton(driver, 9);
+        hingeTogglerDriver.whenPressed(new ToggleHinge());
+        
+        hingeTogglerOpbox = new JoystickButton(opBox, 7);
+        hingeTogglerOpbox.whenPressed(new ToggleHinge());
         
         punchToggler = new JoystickButton(driver, 4);
         punchToggler.whenPressed(new TogglePushPiston());

@@ -16,12 +16,13 @@ public class ElevatorSetpoint extends Command {
 	@Override
 	protected void initialize() {
 		System.out.println("Setting position!!");
-		RobotMap.elevatorRight.set(ControlMode.Position, (((Robot.oi.opBox.getX()+1)/2)*27100) );
+//		RobotMap.elevatorRight.set(ControlMode.Position, (((Robot.oi.opBox.getX()+1)/2)*27200) );
 	}
 	
 	@Override
 	protected void execute() {
-		RobotMap.elevatorRight.set(ControlMode.Position, (((Robot.oi.opBox.getX()+1)/2)*27100) );
+		double value =  (((Robot.oi.opBox.getX()+1)/2)*31000+5);
+		RobotMap.elevatorRight.set(ControlMode.Position, value);
 //		System.out.println("Encoder: " + RobotMap.elevatorRight.getSelectedSensorPosition(0) + "SetPoint: " + ((Robot.oi.opBox.getX()+1)/2)*27100);
 //		System.out.println("Temp pos: " + (((-Robot.oi.xbox.getZ()+1)/2)*20000+5) + "Encoder: " + RobotMap.elevatorRight.getSelectedSensorPosition(0) + " Talon Output: " + RobotMap.elevatorRight.get());
 	}

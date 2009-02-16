@@ -75,6 +75,9 @@ public class RobotMap {
         driveRight.setSafetyEnabled(false);
         driveLeft.setSafetyEnabled(false);
         
+//        driveRight.configSetParameter(ParamEnum.ePeakCurrentLimitAmps, 50, 0, 0, 20);
+//        driveLeft.configSetParameter(ParamEnum.ePeakCurrentLimitAmps, 50, 0, 0, 20);
+        
         //elevator TalonSRXs:
         elevatorLeft = new WPI_TalonSRX(3);
         

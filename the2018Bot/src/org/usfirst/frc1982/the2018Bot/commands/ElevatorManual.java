@@ -16,7 +16,7 @@ public class ElevatorManual extends Command {
 	@Override
 	protected void execute() {
 		RobotMap.elevatorRight.set(ControlMode.PercentOutput, -Robot.oi.driver.getThrottle());
-		System.out.println("Encoder Value: " + RobotMap.elevatorRight.getSelectedSensorPosition(0));
+		System.out.println("Encoder Value: " + RobotMap.elevatorRight.getSelectedSensorPosition(0) + ", JoystickOut: " + Robot.oi.driver.getThrottle());
 //		RobotMap.elevatorRight.Is
 	}
 	

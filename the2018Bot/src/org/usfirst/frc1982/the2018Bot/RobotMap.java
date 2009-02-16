@@ -27,11 +27,11 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class RobotMap {
     
     public static Compressor pneumaticsCompressor;
-    public static DoubleSolenoid pneumaticsGearShifter;
+    public static Solenoid pneumaticsGearShifter;
     
     //claw solenoids:
     public static DoubleSolenoid pneumaticsClaw;
-    public static DoubleSolenoid pneumaticsPunch;
+    public static Solenoid pneumaticsPunch;
     public static DoubleSolenoid pneumaticsHinge;
     
     public static WPI_TalonSRX driveRight;
@@ -48,11 +48,11 @@ public class RobotMap {
         
         pneumaticsCompressor = new Compressor(0);
         
-        pneumaticsGearShifter = new DoubleSolenoid(0, 0, 1);
+        pneumaticsGearShifter = new Solenoid(0, 0);
         pneumaticsClaw = new DoubleSolenoid(0,2,3);
         //open is: kForward
         //closed is: kReverse
-        pneumaticsPunch = new DoubleSolenoid(0,4,5);
+        pneumaticsPunch = new Solenoid(0, 5);
         //out is: 
         //in is: 
         pneumaticsHinge = new DoubleSolenoid(0,6,7);
@@ -78,8 +78,8 @@ public class RobotMap {
         driveRight.setSafetyEnabled(false);
         driveLeft.setSafetyEnabled(false);
         
-        driveRight.configSetParameter(ParamEnum.ePeakCurrentLimitAmps, 50, 0, 0, 20);
-        driveLeft.configSetParameter(ParamEnum.ePeakCurrentLimitAmps, 50, 0, 0, 20);
+        driveRight.configSetParameter(ParamEnum.ePeakCurrentLimitAmps, 100, 0, 0, 20);
+        driveLeft.configSetParameter(ParamEnum.ePeakCurrentLimitAmps, 100, 0, 0, 20);
         
         //slave VictorSPXs:
         //odds on right side:
@@ -113,6 +113,9 @@ public class RobotMap {
         elevatorRight.config_kI(0, 0, 0);
         elevatorRight.config_kD(0, 0, 0);
         elevatorRight.config_kF(0, 0, 0);
+        
+        elevatorRight.configForwardSoftLimitEnable(true, 0);
+        elevatorRight.configForwardSoftLimitThreshold(27500, 0);
         
         System.out.println(elevatorLeft.configReverseLimitSwitchSource(RemoteLimitSwitchSource.RemoteTalonSRX, LimitSwitchNormal.NormallyOpen, 4, 0));
         elevatorLeft.follow(elevatorRight);
