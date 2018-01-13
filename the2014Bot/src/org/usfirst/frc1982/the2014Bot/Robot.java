@@ -18,6 +18,8 @@ import org.usfirst.frc1982.the2014Bot.commands._AutoDoNothing;
 import org.usfirst.frc1982.the2014Bot.commands._AutoSwitch;
 import org.usfirst.frc1982.the2014Bot.subsystems.DriveTrain;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -78,39 +80,42 @@ public class Robot extends TimedRobot {
         
         SmartDashboard.putData("Starting Position", startingPosition);
         gyro = new ADIS16448_IMU();
-//        gyro.calibrate();
-        gyro.reset();
+////        gyro.calibrate();
+//        gyro.reset();
+//        
+//        gyro.calibrate( 10.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 10.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 10.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 10.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 10.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 10.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 20.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 30.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 40.0 );
+//        gyro.reset();
+//        
+//        gyro.calibrate( 50.0 );
+//        gyro.reset();
         
-        gyro.calibrate( 10.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 10.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 10.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 10.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 10.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 10.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 20.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 30.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 40.0 );
-        gyro.reset();
-        
-        gyro.calibrate( 50.0 );
-        gyro.reset();
-        
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution( ImageResolution.MEDIUM.getWidth(), ImageResolution.MEDIUM.getHeight());
+        camera.setFPS(1);
     }
 
     /**
