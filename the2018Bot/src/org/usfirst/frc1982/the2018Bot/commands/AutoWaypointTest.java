@@ -44,10 +44,10 @@ public class AutoWaypointTest extends Command {
 			//negative angle is rotate counterclockwise, + is rotate clockwise
 			Waypoint[] points = new Waypoint[] { //list of waypoints to go through
 				new Waypoint(0.0, 0.0, 0.0),
-				new Waypoint(35.0,0.0,0.0)//,
-//				new Waypoint(50.0,-5.0,Pathfinder.d2r(-45)),
-//				new Waypoint(75.75,-10.0,Pathfinder.d2r(-90)),
-//				new Waypoint(75.75,-15.0,Pathfinder.d2r(-90))
+				new Waypoint(35.0,0.0,0.0),
+				new Waypoint(50.0,-5.0,Pathfinder.d2r(-45)),
+				new Waypoint(75.75,-10.0,Pathfinder.d2r(-90)),
+				new Waypoint(75.75,-15.0,Pathfinder.d2r(-90))
 				
 //				new Waypoint(0,-4,0),
 //				new Waypoint(0.2,-2,0),
@@ -137,7 +137,7 @@ public class AutoWaypointTest extends Command {
 
 	    SmartDashboard.putNumber("Gyro Angle", gyro_heading);
 	    SmartDashboard.putNumber("Desired Heading", desired_heading);
-	    System.out.println("Lencoder: " + lpos + " Rencoder: " + rpos + " Left output: " + l + " Right output: " + r);// + " desired heading: " + desired_heading);
+	    System.out.println("Lencoder: " + (lpos/30759*6) + " Rencoder: " + rpos + " Left output: " + l + " Right output: " + r);// + " desired heading: " + desired_heading);
 	    
 	    RobotMap.driveLeft.set(l + turn);
 	    RobotMap.driveleftSlave.set(l + turn);
