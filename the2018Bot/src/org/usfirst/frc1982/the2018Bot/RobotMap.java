@@ -24,7 +24,9 @@ public class RobotMap {
     public static SpeedController driverightSlave;
     public static Compressor pneumaticsCompressor;
     public static DoubleSolenoid pneumaticsGearShifter;
-
+    
+    public static DoubleSolenoid pneumaticsClaw;
+    
     public static WPI_TalonSRX driveRight;
     public static WPI_TalonSRX driveLeft;
 //    public static DifferentialDrive driveTrain;
@@ -41,6 +43,8 @@ public class RobotMap {
         pneumaticsCompressor = new Compressor(0);
         
         pneumaticsGearShifter = new DoubleSolenoid(0, 0, 1);
+        
+        pneumaticsClaw = new DoubleSolenoid(0,2,3);
         
         driveRight = new WPI_TalonSRX(2);
         
