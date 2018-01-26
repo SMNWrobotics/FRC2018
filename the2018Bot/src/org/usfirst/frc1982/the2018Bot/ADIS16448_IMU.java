@@ -7,19 +7,14 @@
 
 package org.usfirst.frc1982.the2018Bot;
 
-import java.nio.ByteOrder;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-//import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tInstances;
-//import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tResourceType;
-//import edu.wpi.first.wpilibj.communication.UsageReporting;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -27,15 +22,18 @@ import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.InterruptableSensorBase;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tInstances;
+//import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tResourceType;
+//import edu.wpi.first.wpilibj.communication.UsageReporting;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  * This class is for the ADIS16448 IMU that connects to the RoboRIO MXP port.
  */
 public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource {
   private static final double kTimeout = 0.1;
-  private static final double kCalibrationSampleTime = 5.0;
+  private static final double kCalibrationSampleTime = 10.0; //originally set to 5.0
   private static final double kDegreePerSecondPerLSB = 1.0/25.0;
   private static final double kGPerLSB = 1.0/1200.0;
   private static final double kMilligaussPerLSB = 1.0/7.0;

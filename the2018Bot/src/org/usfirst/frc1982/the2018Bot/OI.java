@@ -11,12 +11,13 @@
 
 package org.usfirst.frc1982.the2018Bot;
 
-import org.usfirst.frc1982.the2018Bot.commands.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc1982.the2018Bot.commands.AutonomousCommand;
+import org.usfirst.frc1982.the2018Bot.commands.ToggleGearShift;
+import org.usfirst.frc1982.the2018Bot.commands.driveEnable;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
-import org.usfirst.frc1982.the2018Bot.subsystems.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
