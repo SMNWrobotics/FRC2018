@@ -82,8 +82,8 @@ public class driveEnable extends Command {
 //        // Square the inputs (while preserving the sign) to increase fine control
 //        // while permitting full power.
 //        if (squaredInputs) {
-          xSpeed = Math.copySign(xSpeed * xSpeed, xSpeed);
-          zRotation = Math.copySign(zRotation * zRotation, zRotation);
+//          xSpeed = Math.copySign(xSpeed * xSpeed, xSpeed);
+//          zRotation = Math.copySign(zRotation * zRotation, zRotation);
 //        }
 
         double leftMotorOutput;
@@ -91,7 +91,7 @@ public class driveEnable extends Command {
 
         double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), xSpeed);
 
-        if (xSpeed >= 0.0) {
+        if (xSpeed > 0.0) {
           // First quadrant, else second quadrant
           if (zRotation >= 0.0) {
             leftMotorOutput = maxInput;
@@ -100,7 +100,7 @@ public class driveEnable extends Command {
             leftMotorOutput = xSpeed + zRotation;
             rightMotorOutput = maxInput;
           }
-        } else {
+        } else if (xSpeed < 0.0){
           // Third quadrant, else fourth quadrant
           if (zRotation >= 0.0) {
             leftMotorOutput = xSpeed + zRotation;
@@ -109,6 +109,9 @@ public class driveEnable extends Command {
             leftMotorOutput = maxInput;
             rightMotorOutput = xSpeed - zRotation;
           }
+        }else {
+        	 leftMotorOutput = zRotation;
+             rightMotorOutput = -zRotation;
         }
 
         RobotMap.driveLeft.set(limit(leftMotorOutput));
@@ -118,6 +121,24 @@ public class driveEnable extends Command {
         RobotMap.driverightSlave.set(limit(rightMotorOutput));
       }
     
+    
+    
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
