@@ -11,7 +11,7 @@ import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.Trajectory.Segment;
 import jaci.pathfinder.followers.EncoderFollower;
 
-public class AutoSMidGRight extends Command {
+public class AutoSMidGSwRight extends Command {
 	
 //	new Waypoint(0,0,0),
 //	new Waypoint(105.5,-59.0,0.0)
@@ -26,9 +26,10 @@ public class AutoSMidGRight extends Command {
 		
 		trajectory = new Trajectory(segs); 
 		
+		EncoderFollower[] result = AutoUtil.getPath(trajectory, max_velocity);
 		
-		
-		
+		left = result[0];
+		right = result[1];
 		
 	}
 	

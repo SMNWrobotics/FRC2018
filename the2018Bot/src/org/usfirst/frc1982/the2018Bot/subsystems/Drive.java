@@ -63,11 +63,12 @@ public class Drive extends Subsystem {
 //    	leftSlave.set(left.getMotorOutputPercent());
 //    	rightSlave.set(right.getMotorOutputPercent());
     	
-    	//encoder reading stuffs
+//    	encoder reading stuffs
     	double val = right.getSelectedSensorPosition(0);
     	SmartDashboard.putNumber("Right side Encoder", val);
     	val = left.getSelectedSensorPosition(0);
     	SmartDashboard.putNumber("left Side Encoder", val);
+    	
 //    	SmartDashboard.putNumber("Inches travelled", inchesPerPulse*val);
     }
 

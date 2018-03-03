@@ -1,13 +1,17 @@
 package org.usfirst.frc1982.the2018Bot;
 
-import org.usfirst.frc1982.the2018Bot.commands.AutonomousCommand;
 import org.usfirst.frc1982.the2018Bot.commands.ClawToggle;
+import org.usfirst.frc1982.the2018Bot.commands.ElevatorManual;
+import org.usfirst.frc1982.the2018Bot.commands.ElevatorScaleHeight;
+import org.usfirst.frc1982.the2018Bot.commands.ElevatorSetpointManual;
+import org.usfirst.frc1982.the2018Bot.commands.ElevatorSetpoint;
+import org.usfirst.frc1982.the2018Bot.commands.ElevatorSwitchHeight;
 import org.usfirst.frc1982.the2018Bot.commands.ToggleGearShift;
-import org.usfirst.frc1982.the2018Bot.commands.driveEnable;
+import org.usfirst.frc1982.the2018Bot.commands.ToggleHinge;
+import org.usfirst.frc1982.the2018Bot.commands.TogglePushPiston;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -45,25 +49,49 @@ public class OI {
 
     public JoystickButton gearShifter;
     public JoystickButton clawToggler;
-    public Joystick xbox;
+    public JoystickButton elevatorManual;
+    public JoystickButton elevatorSetPointManual;
+    public JoystickButton elevatorSetPoint;
+    public JoystickButton elevatorSetSwitch;
+    public JoystickButton elevatorSetScale;
+    public JoystickButton hingeToggler;
+    public JoystickButton punchToggler;
+    public Joystick driver;
+    public Joystick opBox;
 
 
     public OI() {
-
-        xbox = new Joystick(0);
+    	
+    	opBox = new Joystick(1);
+        driver = new Joystick(0);
         
-        gearShifter = new JoystickButton(xbox, 2);
+        gearShifter = new JoystickButton(driver, 2);
         gearShifter.whenPressed(new ToggleGearShift());
         
-        clawToggler = new JoystickButton(xbox, 1);
+        clawToggler = new JoystickButton(driver, 1);
         clawToggler.whenPressed(new ClawToggle());
-
+        
+        elevatorManual = new JoystickButton(driver,12);
+        elevatorManual.whenPressed(new ElevatorManual());
+        
+        elevatorSetPointManual = new JoystickButton(driver, 5);
+        elevatorSetPointManual.whenPressed(new ElevatorSetpointManual());
+        
+        elevatorSetPoint = new JoystickButton( driver, 6);
+        elevatorSetPoint.whenPressed(new ElevatorSetpoint());
+        
+        elevatorSetSwitch = new JoystickButton(driver, 7);
+        elevatorSetSwitch.whenPressed(new ElevatorSwitchHeight());
+        
+        elevatorSetScale = new JoystickButton(driver, 8);
+        elevatorSetScale.whenPressed(new ElevatorScaleHeight());
+        
+        hingeToggler = new JoystickButton(driver, 9);
+        hingeToggler.whenPressed(new ToggleHinge());
+        
+        punchToggler = new JoystickButton(driver, 4);
+        punchToggler.whenPressed(new TogglePushPiston());
     }
-
-    public Joystick getxbox() {
-        return xbox;
-    }
-
-
+    
 }
 

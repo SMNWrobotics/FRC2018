@@ -11,7 +11,7 @@ import jaci.pathfinder.Trajectory.Segment;
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 
-public class AutoSLeftGLeft extends Command {
+public class AutoSLeftGSwLeft extends Command {
 	
 //	new Waypoint(0.0, 0.0, 0.0),
 //	new Waypoint(50.0,0.0,0.0),
@@ -30,10 +30,10 @@ public class AutoSLeftGLeft extends Command {
 		trajectory = new Trajectory(segs); 
 		// Wheelbase Width is the distance from the left wheel to the right wheel, in this case 25.5 (inches)
 		
+		EncoderFollower[] result = AutoUtil.getPath(trajectory, max_velocity);
 		
-		
-		
-		
+		left = result[0];
+		right = result[1];
 	}
 	
 	@Override
@@ -65,7 +65,6 @@ public class AutoSLeftGLeft extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
