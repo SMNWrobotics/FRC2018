@@ -1,9 +1,39 @@
 package org.frc1982.common;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import jaci.pathfinder.Trajectory.Segment;
 
 public class AutoChooser {
-	public static Segment[] getAutoPath(Position starting, Goal target, Side targetSide) {
+	public static Segment[] getAutoPath(Position starting, Goal target /*, Side targetSide*/) {
+//interpreting Game Data
+		String GameData = DriverStation.getInstance().getGameSpecificMessage();
+		Side targetSide;
+		if (GameData.length()>0){
+			//There's Game Data
+			if (target == Goal.SWITCH) {
+				if(GameData.charAt(0)=='L') {
+					targetSide = Side.LEFT;
+				}else{
+					targetSide = Side.RIGHT;
+				}
+			}else if (target == Goal.SCALE) {
+				if (GameData.charAt(1)=='L') {
+					targetSide = Side.LEFT;
+				}else{
+					targetSide = Side.RIGHT;
+				}
+			}else{
+				//we're not going for switch or scale, so Game Data doesn't matter.
+				targetSide = Side.LEFT;
+			}
+		}else{
+			//no Game Data, doing nothing
+			System.out.println("Oops, no Game Data, Let's not move");
+			targetSide = Side.LEFT;
+			target = Goal.NOTHING;
+		}
+//Game data interpreted
+		
 		if (starting == Position.LEFT) {
 			if (target == Goal.LINE) {}
 			else if (target == Goal.NOTHING) {}
