@@ -108,7 +108,7 @@ public class AutoUtil {
 	    
 	    double turn = 0.0;
 	    double gyro_heading = -Robot.gyro.getAngleZ()/4; // Assuming the gyro is giving a value in degrees
-	    if (Robot.gyroValid) {
+	    if (Robot.gyroValid && Robot.useGyroForAuto) {
 		    double desired_heading = Pathfinder.r2d(left.getHeading());  // Should also be in degrees
 		    
 		    double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);

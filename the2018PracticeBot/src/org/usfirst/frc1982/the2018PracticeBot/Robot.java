@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
     SendableChooser<Command> chooser = new SendableChooser<>();
     public static ADIS16448_IMU gyro;
     public static boolean gyroValid;
+    public static boolean useGyroForAuto = false;
 
     public static OI oi;
     public static Drive drive;

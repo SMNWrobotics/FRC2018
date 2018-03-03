@@ -7,8 +7,11 @@
 	<classpathentry kind="var" path="opencv" sourcepath="opencv.sources"/>
 	<classpathentry kind="var" path="cscore" sourcepath="cscore.sources"/>
 	<classpathentry kind="var" path="wpiutil" sourcepath="wpiutil.sources"/>
+	<classpathentry kind="lib" path="C:/Users/1982/wpilib/user/java/lib/CTRE_Phoenix.jar"/>
+	<classpathentry kind="lib" path="C:/Users/1982/wpilib/user/java/lib/Pathfinder-Java-1.8.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix-sources.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/Pathfinder-Java-1.8.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CommonRobotics-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
