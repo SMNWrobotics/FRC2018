@@ -16,8 +16,10 @@ public class ClawToggle extends Command {
 	protected void initialize() {
 		if (RobotMap.pneumaticsClaw.get() == DoubleSolenoid.Value.kForward) {
 			RobotMap.pneumaticsClaw.set(DoubleSolenoid.Value.kReverse);
+			System.out.println("Setting Claw Solennoid to Reverse");
 		} else {
 			RobotMap.pneumaticsClaw.set(DoubleSolenoid.Value.kForward);
+			System.out.println("Setting Claw Solenoid to Forward");
 		}
 	}
 	

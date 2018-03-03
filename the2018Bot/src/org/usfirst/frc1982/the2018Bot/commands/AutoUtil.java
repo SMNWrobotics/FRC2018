@@ -99,6 +99,7 @@ public class AutoUtil {
 	    }
 	}
 	
+	//////////////////////////WARNING TO FUTURE USER: testing has shown that trusting the values from the encoders alone is more accurate than using the gyro's values
 	public static double[] getMotorOutput(EncoderFollower left, EncoderFollower right) {
 		int lpos = (int) Math.round(RobotMap.driveLeft.getSelectedSensorPosition(0));
 		int rpos = (int) Math.round(RobotMap.driveRight.getSelectedSensorPosition(0));

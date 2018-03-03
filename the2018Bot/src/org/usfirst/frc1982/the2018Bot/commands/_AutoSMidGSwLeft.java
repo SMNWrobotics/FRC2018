@@ -6,11 +6,12 @@ public class _AutoSMidGSwLeft extends CommandGroup {
 	
 	public _AutoSMidGSwLeft() {
 		addParallel(new AutoSMidGSwLeft());
-		addParallel(new ToggleHinge(), 1);
-		addSequential(new ToggleHinge(), 1);
+//		addParallel(new ToggleHinge(), 1);
+//		addSequential(new ToggleHinge(), 1);
 		addParallel(new ElevatorSwitchHeight());
-		addSequential(new ClawToggle(), 2);
-		addSequential(new ClawToggle(), 2);
+		addParallel(new ClawOpen(2500));
+//		addSequential(new ClawToggle(), 2);
+//		addSequential(new ClawToggle(), 2);
 	}
 	
 }

@@ -58,9 +58,9 @@ public class AutoSLeftGSwLeft extends Command {
 	    System.out.println("Lencoder: " + (lpos/30759*6) + " Rencoder: " + rpos + " Left output: " + l + " Right output: " + r);// + " desired heading: " + desired_heading);
 	    
 	    RobotMap.driveLeft.set(l + turn);
-	    RobotMap.driveleftSlave.set(l + turn);
+//	    RobotMap.driveleftSlave.set(l + turn);
 	    RobotMap.driveRight.set(r - turn);
-    	RobotMap.driverightSlave.set(r - turn);
+//    	RobotMap.driverightSlave.set(r - turn);
 	}
 	
 	@Override

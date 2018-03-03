@@ -52,12 +52,12 @@ public class AutoSMidGSwLeft extends Command {
 			    SmartDashboard.putNumber("Gyro Angle", gyro_heading);
 			    SmartDashboard.putNumber("Desired Heading", desired_heading);
 		    }
-		    System.out.println("Lencoder: " + (lpos/30759*6) + " Rencoder: " + rpos + " Left output: " + l + " Right output: " + r);// + " desired heading: " + desired_heading);
+		    System.out.println("Lencoder: " + (lpos) + " Rencoder: " + rpos + " Left output: " + l + " Right output: " + r);// + " desired heading: " + desired_heading);
 		    
 		    RobotMap.driveLeft.set(l + turn);
-		    RobotMap.driveleftSlave.set(l + turn);
+//		    RobotMap.driveleftSlave.set(l + turn);
 		    RobotMap.driveRight.set(r - turn);
-	    	RobotMap.driverightSlave.set(r - turn);
+//	    	RobotMap.driverightSlave.set(r - turn);
 		}
 		
 		@Override

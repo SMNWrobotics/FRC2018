@@ -15,7 +15,7 @@ public class ElevatorSwitchHeight extends Command {
 	
 	@Override
 	protected void execute() {
-		RobotMap.elevatorRight.set(ControlMode.Position, 9250 ); //9250 is (tested) encoder ticks to get to 25 inches above the ground
+		RobotMap.elevatorRight.set(ControlMode.Position, 11050 ); //9250 is (tested) encoder ticks to get to 25 inches above the ground
 	}
 	
 	@Override

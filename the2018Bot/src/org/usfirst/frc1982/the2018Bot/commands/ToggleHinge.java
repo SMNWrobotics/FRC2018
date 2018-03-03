@@ -10,8 +10,10 @@ public class ToggleHinge extends Command {
 	protected void initialize() {
 		if (RobotMap.pneumaticsHinge.get() == DoubleSolenoid.Value.kForward) {
 			RobotMap.pneumaticsHinge.set(DoubleSolenoid.Value.kReverse);
+			System.out.println("setting Hinge Solenoid to Reverse");
 		} else {
 			RobotMap.pneumaticsHinge.set(DoubleSolenoid.Value.kForward);
+			System.out.println("Setting Hinge Solenoid to Forward");
 		}
 	}
 	

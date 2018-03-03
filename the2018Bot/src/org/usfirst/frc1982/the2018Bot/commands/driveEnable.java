@@ -92,10 +92,10 @@ public class driveEnable extends Command {
         }
 
         RobotMap.driveLeft.set(limit(leftMotorOutput));
-        RobotMap.driveleftSlave.set(limit(leftMotorOutput));
+//        RobotMap.driveleftSlave.set(limit(leftMotorOutput));
         
         RobotMap.driveRight.set(limit(rightMotorOutput));
-        RobotMap.driverightSlave.set(limit(rightMotorOutput));
+//        RobotMap.driverightSlave.set(limit(rightMotorOutput));
       }
     
 

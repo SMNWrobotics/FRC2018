@@ -6,6 +6,7 @@ import org.usfirst.frc1982.the2018Bot.commands.ElevatorScaleHeight;
 import org.usfirst.frc1982.the2018Bot.commands.ElevatorSetpointManual;
 import org.usfirst.frc1982.the2018Bot.commands.ElevatorSetpoint;
 import org.usfirst.frc1982.the2018Bot.commands.ElevatorSwitchHeight;
+import org.usfirst.frc1982.the2018Bot.commands.PushAndOpen;
 import org.usfirst.frc1982.the2018Bot.commands.ToggleGearShift;
 import org.usfirst.frc1982.the2018Bot.commands.ToggleHinge;
 import org.usfirst.frc1982.the2018Bot.commands.TogglePushPiston;
@@ -56,6 +57,7 @@ public class OI {
     public JoystickButton elevatorSetScale;
     public JoystickButton hingeToggler;
     public JoystickButton punchToggler;
+    public JoystickButton punchAndOpen;
     public Joystick driver;
     public Joystick opBox;
 
@@ -68,7 +70,7 @@ public class OI {
         gearShifter = new JoystickButton(driver, 2);
         gearShifter.whenPressed(new ToggleGearShift());
         
-        clawToggler = new JoystickButton(driver, 1);
+        clawToggler = new JoystickButton(driver, 9);
         clawToggler.whenPressed(new ClawToggle());
         
         elevatorManual = new JoystickButton(driver,12);
@@ -86,11 +88,14 @@ public class OI {
         elevatorSetScale = new JoystickButton(driver, 8);
         elevatorSetScale.whenPressed(new ElevatorScaleHeight());
         
-        hingeToggler = new JoystickButton(driver, 9);
+        hingeToggler = new JoystickButton(driver, 1);
         hingeToggler.whenPressed(new ToggleHinge());
         
         punchToggler = new JoystickButton(driver, 4);
         punchToggler.whenPressed(new TogglePushPiston());
+        
+        punchAndOpen = new JoystickButton(driver, 10);
+        punchAndOpen.whenPressed(new PushAndOpen());
     }
     
 }

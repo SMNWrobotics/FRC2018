@@ -10,8 +10,10 @@ public class TogglePushPiston extends Command {
 	protected void initialize() {
 		if (RobotMap.pneumaticsPunch.get() == DoubleSolenoid.Value.kForward) {
 			RobotMap.pneumaticsPunch.set(DoubleSolenoid.Value.kReverse);
+			System.out.println("Setting Push Piston Solenoid to Reverse");
 		} else {
 			RobotMap.pneumaticsPunch.set(DoubleSolenoid.Value.kForward);
+			System.out.println("Setting Push Piston Solenoid to Forward");
 		}
 	}
 	
