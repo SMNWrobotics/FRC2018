@@ -7,24 +7,37 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ClawOpen extends Command {
+
+	long delay; //delay in milliseconds
+	long oldTime;
 	
-	public ClawOpen() {
+	public ClawOpen(long MillisecondsDelay) {
 		requires(Robot.claw);
+		delay = MillisecondsDelay;
 	}
 	
 	@Override
 	protected void initialize() {
-		RobotMap.pneumaticsClaw.set(DoubleSolenoid.Value.kForward);
+		oldTime = System.currentTimeMillis();
+		if (delay == 0) {
+			RobotMap.pneumaticsHinge.set(DoubleSolenoid.Value.kForward);
+		}
 	}
 	
 	@Override
 	protected void execute() {
-		
+		if (System.currentTimeMillis()-oldTime >= delay) {
+			RobotMap.pneumaticsHinge.set(DoubleSolenoid.Value.kForward);
+		}
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return true;
+		if (delay == 0 || System.currentTimeMillis()-oldTime >= delay+1000) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	@Override
@@ -37,3 +50,4 @@ public class ClawOpen extends Command {
 		
 	}
 }
+

@@ -14,7 +14,7 @@ import jaci.pathfinder.modifiers.TankModifier;
 
 public class AutoWaypointTest extends Command {
 	
-	private boolean generateNew = false;
+	private boolean generateNew = true;
 	private boolean generateOnly;
 	
 	EncoderFollower left;
@@ -27,7 +27,7 @@ public class AutoWaypointTest extends Command {
 		long oldTime;
 		
 		//max_velocity inches / second
-		double max_velocity = 200;
+		double max_velocity = Robot.max_velocity; //200 works fast enough
 		
 		//trajectory for the robot to follow.  Made in one of two ways depending on the boolean generateNew
 		Trajectory trajectory;
@@ -39,15 +39,28 @@ public class AutoWaypointTest extends Command {
 	        		               , Trajectory.Config.SAMPLES_HIGH
 	        		               , 0.05 //time delta between points (seconds)
 	        		               , max_velocity //max_velocity inches / second
-	        		               , 100 //max_acceleration inches / second^2
+	        		               , 80 //set to 100 when done with this test (March 3) //max_acceleration inches / second^2
 	        		               , 80.0  //max_jerk inches / second^3
 	        		               );
 			//waypoint comments: x is forwards, y is sideways
 			//negative angle is rotate counterclockwise, + is rotate clockwise
 			//list of waypoints to go through
 			Waypoint[] points = new Waypoint[] {
-					new Waypoint(0,0,0),
-					new Waypoint(99,55.0,0.0)
+					//auto_line code:
+					new Waypoint(0.0,0.0,0.0),
+					new Waypoint(140.0,0.0,0.0)
+					
+					//perhaps untested?? March 3rd I beleive?
+//					new Waypoint(0,0,0),
+//					new Waypoint(168.0,0.0,0),
+//					new Waypoint(259.0,-33.0,0)
+					
+					
+//					new Waypoint(0,0,0),
+//					new Waypoint(50.0,0.0,0.0),
+//					new Waypoint(75.0,0.0,0.0),
+//					new Waypoint(100.0,0.0,0.0),
+//					new Waypoint(151.5,29.06,Pathfinder.d2r(-90))
 					
 //				//test output from my processing program: (should be for left side of switch)
 //				new Waypoint(0.0,0.0,1.5707964),
@@ -138,6 +151,12 @@ public class AutoWaypointTest extends Command {
 			    	
 			    	System.out.printf("%f,%f,%f,%f,%f,%f,%f,%f\n", seg.dt, seg.x, seg.y, seg.position, seg.velocity, seg.acceleration, seg.jerk, seg.heading);
 			    }
+			  //print out each segment's data (for future use without the need to regenerate them)
+			    for (int i =0; i < trajectory.length(); i++) {
+			    	Trajectory.Segment seg = trajectory.get(i);
+			    	
+			    	System.out.printf("new Segment(%f,%f,%f,%f,%f,%f,%f,%f),\n", seg.dt, seg.x, seg.y, seg.position, seg.velocity, seg.acceleration, seg.jerk, seg.heading);
+			    }
 	    	}
 	    }
 	}
@@ -152,7 +171,7 @@ public class AutoWaypointTest extends Command {
 		    
 		    double turn = 0.0;
 		    double gyro_heading = -Robot.gyro.getAngleZ()/4; // Assuming the gyro is giving a value in degrees
-		    if (true) {//Robot.gyroValid) {
+		    if (false) {//Robot.gyroValid) {
 			    double desired_heading = Pathfinder.r2d(left.getHeading());  // Should also be in degrees
 			    
 			    double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
@@ -161,7 +180,7 @@ public class AutoWaypointTest extends Command {
 			    SmartDashboard.putNumber("Gyro Angle", gyro_heading);
 			    SmartDashboard.putNumber("Desired Heading", desired_heading);
 		    }
-		    System.out.println("Lencoder: " + lpos + " Rencoder: " + rpos + " Left output: " + l + " Right output: " + r);// + " desired heading: " + desired_heading);
+		    System.out.println("Lencoder: " + lpos + " Rencoder: " + rpos + " Left output: " + (l+turn) + " Right output: " + (r-turn));// + " desired heading: " + desired_heading);
 		    
 		    RobotMap.driveLeft.set(l + turn);
 		    RobotMap.driveleftSlave.set(l + turn);
