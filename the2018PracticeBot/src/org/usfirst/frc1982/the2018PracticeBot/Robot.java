@@ -91,6 +91,13 @@ public class Robot extends TimedRobot {
 //        SmartDashboard.putBoolean("Only Generate Autonomous", true);
         
         CameraServer.getInstance().startAutomaticCapture();
+        SmartDashboard.putBoolean("Do Switch?", true);
+        SmartDashboard.putBoolean("Do Scale?", true);
+        SmartDashboard.putBoolean("Do Line?", true);
+        SmartDashboard.putBoolean("Prioritize switch?", false);
+        
+        
+        
     }
 
     /**
@@ -112,10 +119,10 @@ public class Robot extends TimedRobot {
     public boolean parseGameData(String GameData) {
     	//delete once wyatt makes the thing
     	char startingPos = 'L';
-    	boolean switchSwSc = false;
-    	boolean Sw = true;
-    	boolean Sc = false;
-    	boolean Line = true;
+    	boolean switchSwSc = SmartDashboard.getBoolean("Prioritize switch?", false);
+    	boolean Sw = SmartDashboard.getBoolean("Do Switch?", false);
+    	boolean Sc = SmartDashboard.getBoolean("Do Scale?", false);
+    	boolean Line = SmartDashboard.putBoolean("Do Line?", false);
     	//if the gamedata actually has something useful:
     	if (GameData.length() > 0) {
     		if (!switchSwSc) { //if we are following the normal priority list:
