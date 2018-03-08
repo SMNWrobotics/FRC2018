@@ -150,7 +150,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
     	RobotMap.pneumaticsGearShifter.set(DoubleSolenoid.Value.kReverse);
         
-        autonomousCommand = new _AutoGeneral(AutoChooser.getAutoPath(Position.MID, Goal.NOTHING, "LRL"), Goal.SWITCH);
+//        autonomousCommand = new _AutoGeneral(AutoChooser.getAutoPath(Position.MID, Goal.NOTHING, "LRL"), Goal.SWITCH);
     	
         if (autonomousCommand != null) {
         	System.out.println("auto Should begin running now");
