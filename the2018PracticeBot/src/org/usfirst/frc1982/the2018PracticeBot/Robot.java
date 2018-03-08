@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
     public static DrivePneumatics pneumatics;
     public static Claw claw;
     public static Elevator elevator;
-
+    SendableChooser<Position> StartPos= new SendableChooser<>();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -91,6 +91,12 @@ public class Robot extends TimedRobot {
 //        SmartDashboard.putBoolean("Only Generate Autonomous", true);
         
         CameraServer.getInstance().startAutomaticCapture();
+        
+        StartPos.addDefault("Middle", Position.MID);
+        StartPos.addObject("Left", Position.LEFT);
+        StartPos.addObject("Right", Position.RIGHT);
+        
+        SmartDashboard.putData("Start Position", StartPos);
         SmartDashboard.putBoolean("Do Switch?", true);
         SmartDashboard.putBoolean("Do Scale?", true);
         SmartDashboard.putBoolean("Do Line?", true);
