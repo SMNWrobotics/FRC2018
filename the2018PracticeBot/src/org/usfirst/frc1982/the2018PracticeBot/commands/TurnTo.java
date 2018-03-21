@@ -12,7 +12,7 @@ public class TurnTo extends PIDCommand {
 	
 	private boolean done = false;
 	private int ctr;
-	private double maxSpeed = .8;
+	private double maxSpeed = .6;
 	private double deadZone = 0.0;//0.17;
 	private double target;
 	
@@ -20,7 +20,7 @@ public class TurnTo extends PIDCommand {
 	
 	public TurnTo( double degrees) {//, double maxSpeed) {
 //		super(0.65/90.0, 0.0, 0.0); //finished auto in 7 seconds with only P value (maxSpeed = .4)
-		super(1.25/90.0, 0.0002, 0.05);
+		super(.4/90.0, 0.0001, 0.03);
 		requires(Robot.drive);
 		setInputRange(-95,95);
 		setSetpoint(0);

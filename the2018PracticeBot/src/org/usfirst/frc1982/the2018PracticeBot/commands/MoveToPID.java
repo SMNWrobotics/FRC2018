@@ -9,7 +9,7 @@ public class MoveToPID extends PIDCommand {
 	
 	private boolean done = false;
 	private int ctr;
-	private double maxSpeed = .8;
+	private double maxSpeed = .4;
 	private double deadZone = 0.0;//0.17;
 	private double target;
 	

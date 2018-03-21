@@ -20,6 +20,10 @@ import org.usfirst.frc1982.the2018Bot.subsystems.Claw;
 import org.usfirst.frc1982.the2018Bot.subsystems.Drive;
 import org.usfirst.frc1982.the2018Bot.subsystems.DrivePneumatics;
 import org.usfirst.frc1982.the2018Bot.subsystems.Elevator;
+import org.usfirst.frc1982.the2018Bot.commands._AutoFarLine;
+import org.usfirst.frc1982.the2018Bot.commands._AutoSLeftGSwLeft;
+import org.usfirst.frc1982.the2018Bot.commands._AutoSRightGSwRight;
+import org.frc1982.common.Side;
 import org.usfirst.frc1982.the2018Bot.commands._AutoDoNothing;
 import org.usfirst.frc1982.the2018Bot.commands._AutoLineCross;
 import org.usfirst.frc1982.the2018Bot.commands._AutoSMidGSwLeft;
@@ -233,14 +237,21 @@ public class Robot extends TimedRobot {
     			//starting on the left:
     			if (targetSide == Side.LEFT) {
     				System.out.println("AutoSLeftGSwLeft");
+    				return new _AutoSLeftGSwLeft();
+    			} else {
+    				System.out.println("AutoFarLineCross");
+    				return new _AutoFarLine();
     			}
     		} else {
     			//starting on the right:
     			if (targetSide==Side.RIGHT) {
     				System.out.println("AutoSRightSwRight");
+    				return new _AutoSRightGSwRight();
+    			} else {
+    				System.out.println("AutoFarLineCross");
+    				return new _AutoFarLine();
     			}
     		}
-    		break;
     	case SCALE:
     		System.out.println("Goal is scale; not running auto, you done goofed");
     		break;

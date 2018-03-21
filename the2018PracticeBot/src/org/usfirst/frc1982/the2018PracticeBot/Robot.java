@@ -12,6 +12,7 @@ import org.usfirst.frc1982.the2018PracticeBot.commands.MoveTo;
 import org.usfirst.frc1982.the2018PracticeBot.commands.MoveToPID;
 import org.usfirst.frc1982.the2018PracticeBot.commands.TurnTo;
 import org.usfirst.frc1982.the2018PracticeBot.commands._AutoDoNothing;
+import org.usfirst.frc1982.the2018PracticeBot.commands._AutoFarLine;
 import org.usfirst.frc1982.the2018PracticeBot.commands._AutoLineCross;
 import org.usfirst.frc1982.the2018PracticeBot.commands._AutoSLeftGSwLeft;
 import org.usfirst.frc1982.the2018PracticeBot.commands._AutoSMidGSwLeft;
@@ -85,7 +86,7 @@ public class Robot extends TimedRobot {
         chooser.addObject("AutoSMidGSwLeft", new _AutoSMidGSwLeft());
         chooser.addObject("AutoSMidGSwRight", new _AutoSMidGSwRight());
         chooser.addObject("AutoSLeftGSwLeft", new _AutoSLeftGSwLeft());
-        chooser.addObject("AutoSLeftGSwLeft", new _AutoSRightGSwRight());
+        chooser.addObject("AutoSRightGSwRight", new _AutoSRightGSwRight());
         SmartDashboard.putData("Auto mode", chooser);
         
         gyro = new ADIS16448_IMU();
@@ -203,8 +204,8 @@ public class Robot extends TimedRobot {
 //        autonomousCommand = new _AutoGeneral(AutoChooser.getAutoPath(StartPos.getSelected(), goal, targetSide), goal);
 //    	autonomousCommand = new _AutoSLeftGSwLeft();
     	
-//        autonomousCommand = chooser.getSelected();
-    	autonomousCommand = getAuto();
+        autonomousCommand = chooser.getSelected();
+//    	autonomousCommand = getAuto();
     	
         if (autonomousCommand != null) {
         	autonomousCommand.start();
@@ -229,14 +230,21 @@ public class Robot extends TimedRobot {
     			//starting on the left:
     			if (targetSide == Side.LEFT) {
     				System.out.println("AutoSLeftGSwLeft");
+    				return new _AutoSLeftGSwLeft();
+    			} else {
+    				System.out.println("AutoFarLineCross");
+    				return new _AutoFarLine();
     			}
     		} else {
     			//starting on the right:
     			if (targetSide==Side.RIGHT) {
     				System.out.println("AutoSRightSwRight");
+    				return new _AutoSRightGSwRight();
+    			} else {
+    				System.out.println("AutoFarLineCross");
+    				return new _AutoFarLine();
     			}
     		}
-    		break;
     	case SCALE:
     		System.out.println("Goal is scale; not running auto, you done goofed");
     		break;
